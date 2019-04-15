@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Grid from '@material-ui/core/Grid';
 import Select from 'react-select';
 import { withStyles } from '@material-ui/core/styles';
 
 import { connect } from 'react-redux'
-import fetchLocationWeather from '../actions/weatherAction'
+import fetchLocationWeather, {fetchLocationViaLatAndLon} from '../actions/weatherAction'
 
 const styles = theme => ({
     root: {
@@ -27,6 +27,22 @@ const options = [
 
 const SearchWeatherComponent = (props) => {
     const { classes } = props;
+    
+    const getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          }
+    }
+
+    const showPosition = (position) => {
+        console.log("Latitude: " + position.coords.latitude + 
+        "<br>Longitude: " + position.coords.longitude);
+        props.fetchLocationViaLatAndLon(position.coords.latitude,position.coords.longitude, props.unit)
+    }
+
+    useEffect(() => {
+        getLocation();
+      }, []);
 
     const [selectedOption,setselectedOption] = useState(null)
 
@@ -61,7 +77,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchWeatherData: (city, unit) => (fetchLocationWeather(city , unit, dispatch))
+        fetchWeatherData: (city, unit) => (fetchLocationWeather(city , unit, dispatch)),
+        fetchLocationViaLatAndLon: (lat, lon, unit) => (fetchLocationViaLatAndLon(lat, lon, unit, dispatch))
     }
 } 
 
