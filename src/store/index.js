@@ -9,7 +9,7 @@ export const reducers = combineReducers({
     weather: weatherReducer,
 });
 
-export const store   = createStore(reducers, composeWithDevTools(applyMiddleware(createPromise(), thunk /*, createLogger()*/)));
+export const store   = createStore(reducers, composeWithDevTools(applyMiddleware(createPromise(), thunk , createLogger())));
 
 // store.dispatch(fetchLocationWeather);
 export default store;

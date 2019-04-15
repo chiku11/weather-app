@@ -19,7 +19,7 @@ const fetchLocationWeather = (city, dispatch) => {
         header
     );
 
-    dispatch({type:'FETCH_WEATHER_PENDING',payload: {fetching:true}});
+    dispatch({type:'FETCH_WEATHER_PENDING',payload: true});
     request.get(
         'https://weather-ydn-yql.media.yahoo.com/forecastrss?location='+city+'&format=json',
         null,
@@ -28,7 +28,9 @@ const fetchLocationWeather = (city, dispatch) => {
             if (err) {
                 dispatch({type:'FETCH_WEATHER_REJECTED', payload: err});
             } else {
-                dispatch({type:'FETCH_WEATHER_FULFILLED', payload: JSON.parse(data)});
+                setTimeout(()=>{
+                    dispatch({type:'FETCH_WEATHER_FULFILLED', payload: JSON.parse(data)});
+                }, 5000)
             }
         }
     );

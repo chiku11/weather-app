@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import _ from 'lodash'
+import CloudyImage from '../images/cloudy.jpg';
+import ThunderImage from '../images/rainythunder.jpg';
 
 import { connect } from 'react-redux'
 
@@ -15,6 +17,7 @@ const styles = theme => ({
   paper: {
     height: 160,
     width: 120,
+    backgroundImage: `url(${CloudyImage})`,
   },
   control: {
     padding: theme.spacing.unit * 2,
@@ -50,7 +53,6 @@ ForecastComponent.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.dir(state.weather.weatherData);
     return {weatherData: state.weather.weatherData}
 }
 
