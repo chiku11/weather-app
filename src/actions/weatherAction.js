@@ -3,7 +3,11 @@
 
 import OAuth from 'oauth';
 
-const fetchLocationWeather = (city, dispatch) => {
+export const setUnitPreference = (unit, dispatch) => {
+    dispatch({type:'WEATHER_UNIT_PREFERENCE', payload: unit})
+} 
+
+const fetchLocationWeather = (city, unit, dispatch) => {
     var header = {
         "X-Yahoo-App-Id": "app_id"
     };
@@ -21,14 +25,17 @@ const fetchLocationWeather = (city, dispatch) => {
 
     dispatch({type:'FETCH_WEATHER_PENDING',payload: true});
     request.get(
-        'https://weather-ydn-yql.media.yahoo.com/forecastrss?location='+city+'&format=json',
+        'https://weather-ydn-yql.media.yahoo.com/forecastrss?location='+city+'&format=json&u='+unit,
         null,
         null,
         function (err, data, result) {
             if (err) {
                 dispatch({type:'FETCH_WEATHER_REJECTED', payload: err});
             } else {
-                dispatch({type:'FETCH_WEATHER_FULFILLED', payload: JSON.parse(data)});
+                setTimeout(() => {
+                    console.log(`Intentional dealy to display progress bar. Please remove the timeout around the dispatch`);
+                    dispatch({type:'FETCH_WEATHER_FULFILLED', payload: JSON.parse(data)});
+                }, 2000);
             }
         }
     );

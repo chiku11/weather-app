@@ -18,10 +18,11 @@ const styles = theme => ({
   });
 
 const options = [
-    { value: 'sunnyvale,ca', label: 'sunnyvale' },
-    { value: 'schaumburg,il', label: 'schaumburg' },
-    { value: 'newark,nj', label: 'newark' },
-    { value: 'paris,france', label: 'paris' }
+    { value: 'schaumburg,il', label: 'Schaumburg' },
+    { value: 'SanFrancisco,ca', label: 'San Francisco' },
+    { value: 'Rolling meadows,il', label: 'Rolling Meadows' },
+    { value: 'Richmond,va', label: 'Richmond' },
+    { value: 'Mclean,va', label: 'Mclean' },
   ]; 
 
 const SearchWeatherComponent = (props) => {
@@ -32,7 +33,7 @@ const SearchWeatherComponent = (props) => {
 
     const handleChange = (selectedOption) => {
         setselectedOption(selectedOption);
-        props.fetchWeatherData(selectedOption.value);
+        props.fetchWeatherData(selectedOption.value, props.unit);
       }
 
     return (
@@ -53,10 +54,15 @@ const SearchWeatherComponent = (props) => {
     )
   }
 
+const mapStateToProps = (state) => {
+    return {
+        unit: state.weather.u
+    }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchWeatherData: (city) => (fetchLocationWeather(city , dispatch))
+        fetchWeatherData: (city, unit) => (fetchLocationWeather(city , unit, dispatch))
     }
 } 
 
-export default withStyles(styles)(connect(null, mapDispatchToProps)(SearchWeatherComponent));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SearchWeatherComponent));

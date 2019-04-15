@@ -1,7 +1,8 @@
 const initialState = {
     fetching: false,
     weatherData:{},
-    err: {}
+    err: {},
+    u:'f'
 }
 const weatherReducer = (state=initialState, action) => {
 
@@ -17,6 +18,10 @@ const weatherReducer = (state=initialState, action) => {
 
         case 'FETCH_WEATHER_REJECTED':{
             return Object.assign({}, state, {err: action.payload});
+        }
+
+        case 'WEATHER_UNIT_PREFERENCE':{
+            return Object.assign({}, state, {u: action.payload});
         }
 
         default:

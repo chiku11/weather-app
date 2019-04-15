@@ -10,6 +10,7 @@ import CloudyImage from '../images/cloudy.jpg';
 import SnowImage from '../images/snow.jpg';
 import ScatteredShowerImage from '../images/scatteredshower.jpg';
 import SunnyImage from '../images/sunny.jpg'
+import BreezyImage from '../images/breezy.jpg'
 
 import { connect } from 'react-redux'
 
@@ -60,7 +61,7 @@ const ForecastComponent = (props) => {
 
  const getBackGroundImg = (condition ) => {
 
-    if ( condition === 'Showers' || condition === 'Rain' || condition === 'Scattered Thunderstorms' ) {
+    if ( condition === 'Showers' || condition === 'Rain' || condition === 'Scattered Thunderstorms' || condition === 'Thunderstorms' ) {
         return ScatteredShowerImage
     } else if ( condition === 'Sunny' || condition === 'Mostly Sunny' ) {
         return SunnyImage;
@@ -70,6 +71,8 @@ const ForecastComponent = (props) => {
         return CloudyImage;
     } else if ( condition === 'Rain And Snow' ) {
         return SnowImage;
+    } else if ( condition === 'Breezy' ) {
+        return BreezyImage;
     }
 
  } 
