@@ -19,8 +19,9 @@ const styles = theme => ({
 
 const options = [
     { value: 'sunnyvale,ca', label: 'sunnyvale' },
-    { value: 'schaumburg,il', label: 'schaumburg    ' },
-    { value: 'newark,nj', label: 'newark' }
+    { value: 'schaumburg,il', label: 'schaumburg' },
+    { value: 'newark,nj', label: 'newark' },
+    { value: 'paris,france', label: 'paris' }
   ]; 
 
 const SearchWeatherComponent = (props) => {

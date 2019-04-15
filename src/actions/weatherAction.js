@@ -28,9 +28,7 @@ const fetchLocationWeather = (city, dispatch) => {
             if (err) {
                 dispatch({type:'FETCH_WEATHER_REJECTED', payload: err});
             } else {
-                setTimeout(()=>{
-                    dispatch({type:'FETCH_WEATHER_FULFILLED', payload: JSON.parse(data)});
-                }, 5000)
+                dispatch({type:'FETCH_WEATHER_FULFILLED', payload: JSON.parse(data)});
             }
         }
     );
